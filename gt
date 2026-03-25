@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Nhóm của tôi',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const TeamPage(),
+    );
+  }
+}
+
+class TeamPage extends StatelessWidget {
+  const TeamPage({super.key});
+
+  final List<Map<String, String>> members = const [
+    {"name": "Bùi Hữu Tuấn", "role": "Leader"},
+    {"name": "Trần Đình Thịnh", "role": "Designer"},
+    {"name": "Phan Duy Quang", "role": "Developer"},
+    {"name": "Nguyễn Trung Kiên", "role": "Tester"},
+    {"name": "Hoàng Văn Định", "role": "Support"},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("👨‍💻 Thành viên nhóm"),
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(12),
+        itemCount: members.length,
+        itemBuilder: (context, index) {
+          final member = members[index];
+
+          return Card(
+            elevation: 5,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: ListTile(
+              leading: const CircleAvatar(child: Icon(Icons.person)),
+              title: Text(member["name"]!),
+              subtitle: Text(member["role"]!),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
